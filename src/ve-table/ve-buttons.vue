@@ -1,40 +1,41 @@
 <template>
   <div>
       <template 
-        v-for="(button,index) of actionsData"
+        v-for="({click, text, children, useSlot, ...rest},index) of actionsData"
       >
-        <template v-if="button.children && button.children.length > 0">
+        <template v-if="children && children.length > 0">
             <el-dropdown :key="index" @command="dropdownClick">
               <template>
-                <slot v-if="button.useSlot" name="button" />
-                <el-button v-else :key="index" @click="button.click">
-                    {{button.text}}
-                    <template v-if="button.children && button.children.length > 0">
-                        <i class="el-icon-arrow-down el-icon--right"></i>
-                    </template>
-                </el-button>
+                <slot v-if="useSlot" name="button" />
+               <ve-button 
+                v-else 
+                :key="index"
+                :button="{click, text, children}"
+                v-bind="rest"
+               >
+              </ve-button>
               </template>
               <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item 
-                    v-for="({id, text, click, ...rest}) of button.children"
-                    :command="id" 
-                    :key="id" 
-                    @click="click"
-                    v-bind="rest"
+                    v-for="({id: _id, text: _text, click: _click, ..._rest}) of children"
+                    :command="_id" 
+                    :key="_id" 
+                    @click="_click"
+                    v-bind="_rest"
                 >
-                    {{ text }}
+                    {{ _text }}
                 </el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
         </template>
         <template v-else>
-            <slot v-if="button.useSlot" name="button" />
-            <el-button v-else :key="index" @click="button.click">
-                {{button.text}}
-                <template v-if="button.children && button.children.length > 0">
-                    <i class="el-icon-arrow-down el-icon--right"></i>
-                </template>
-            </el-button>
+            <slot v-if="useSlot" name="button" />
+            <ve-button 
+              v-else 
+              :key="index"
+              :button="{click, text, children}"
+              v-bind="rest">
+            </ve-button>
         </template>
 
         
@@ -44,8 +45,12 @@
 
 <script>
 import { throttle } from 'lodash'
+import VeButton from './ve-button'
 export default {
   name: "VeButtons",
+  components: {
+    VeButton,
+  },
   props: {
       buttons: {
           type: Array,

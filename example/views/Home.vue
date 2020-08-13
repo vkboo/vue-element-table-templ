@@ -1,11 +1,3 @@
-<!--
- * @Author: 子君
- * @Date: 2020-07-22 12:44:02
- * @LastEditors: 子君
- * @LastEditTime: 2020-08-06 16:52:48
- * @Description: 使用按钮
- * @FilePath: \vue-element-table\example\views\demo\button.vue
--->
 <template>
   <ve-table
     v-loading="loading"
