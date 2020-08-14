@@ -7,6 +7,7 @@
     :page-size.sync="pageSize"
     :total="total"
     :buttons="buttons"
+    :sequence="true"
     @page-change="$_handlePageChange"
   >
     <template #toolbar>

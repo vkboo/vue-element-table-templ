@@ -1,36 +1,35 @@
 <template>
-  <div 
-   class="zj-table" 
-   :style="{ height: this.tableContainerHeight }"
-  >
-    
+  <div class="zj-table" :style="{ height: this.tableContainerHeight }">
     <template v-if="buttons.length > 0 || $slots.toolbar">
-        <ve-toolbar 
-          :buttons="buttons"
-          :selectable="selectable"
-          :selectRows="selectRows"
-          :currentRow="currentRow"
-        >
-            <template #toolbar>
-                <slot name="toolbar" />
-            </template>
-        </ve-toolbar>
+      <ve-toolbar
+        :buttons="buttons"
+        :selectable="selectable"
+        :selectRows="selectRows"
+        :currentRow="currentRow"
+      >
+        <template #toolbar>
+          <slot name="toolbar" />
+        </template>
+      </ve-toolbar>
     </template>
-    <ve-table-content />
+    <ve-table-content 
+      :data="data" 
+      :row-key="rowKey" 
+      :columns="columns"
+      :selectable="selectable"
+      :sequence="sequence"
+    ></ve-table-content>
     <ve-page />
   </div>
 </template>
 
 <script>
 // import Schema from 'async-validator'
-import { Table } from 'element-ui'
+import { Table } from "element-ui";
 
-import VePage from './ve-page'
-import VeTableContent from './ve-table-content'
-import VeToolbar from './ve-toolbar'
-
-
-
+import VePage from "./ve-page";
+import VeTableContent from "./ve-table-content";
+import VeToolbar from "./ve-toolbar";
 
 // const tableProps = {
 //   defaultExpandAll: Table.props.defaultExpandAll,
@@ -41,9 +40,9 @@ import VeToolbar from './ve-toolbar'
 export default {
   name: "VeTable",
   components: {
-      VeToolbar,
-      VeTableContent,
-      VePage,
+    VeToolbar,
+    VeTableContent,
+    VePage,
   },
   props: {
     ...Table.props,
