@@ -26,45 +26,19 @@
         :index="$_setColIndex"
       ></el-table-column>
       <!-- 遍历table的数据列 -->
-      <template v-for="({
-        label, field = {}, align = 'left',
-        useSlot = false, formatter, width,
-        editable, events, ...rest
-      }, index) of cp_showColumns">
-        <!-- 渲染嵌套列 -->
-        <!-- <el-table-column
-          v-if="column.nests && nests.length.length > 0"
-          :key="column[rowKey]"
-          :label="column.label"
-        ></el-table-column> -->
-        <!-- 渲染编辑列 -->
-        <el-table-column
-          :key="index"
-          v-if="editable"
-          :label="label"
-          :width="width"
-          :align="align"
-          show-overflow-tooltip
-          v-on="events"
-          v-bind="rest"
-        ></el-table-column>
-        <el-table-column
-          v-else
-          :key="index"
-          :label="label"
-          :width="width"
-          :align="align"
-          show-overflow-tooltip
-          v-on="events"
-          v-bind="rest"
-        ></el-table-column>
-      </template>
+      <ve-table-column
+        v-for="column of cp_showColumns"
+        :key="column[rowKey]"
+        :column-data="column"
+      >
+      </ve-table-column>
     </el-table>
   </div>
 </template>
 
 <script>
-import { Table } from "element-ui";
+import { Table } from "element-ui"
+import VeTableColumn from './ve-table-column.vue'
 const tableProps = {
   defaultExpandAll: Table.props.defaultExpandAll,
   treeProps: Table.props.treeProps,
@@ -72,6 +46,7 @@ const tableProps = {
 };
 export default {
   name: "VeTableContent",
+  components: { VeTableColumn },
   props: {
     columns: {
       type: Array,
