@@ -27,6 +27,16 @@ export default {
           width: 220,
           label: "姓名",
           prop: "name",
+          nests: [
+            {
+              label: "姓氏",
+              prop: "lastName",
+            },
+            {
+              label: "名字",
+              prop: "firstName",
+            },
+          ]
         },
         {
           label: "性别",
@@ -36,47 +46,47 @@ export default {
             return cellValue === 1 ? "男" : "女";
           },
         },
-        {
-          label: "年龄",
-          prop: "age",
-        },
-        {
-          label: "公众号",
-          prop: "officialAccount",
-        },
-        // 行编辑按钮，在表格末尾出现，自动锁定右侧
-        {
-          width: 180,
-          label: "操作",
-          actions: [
-            {
-              id: "follow",
-              text: "关注作者",
-              click: this.$_handleFollowAuthor,
-            },
-            {
-              id: "edit",
-              text: "编辑",
-              // 可以通过before控制按钮是否显示，比如下面年龄四十岁的才会显示编辑按钮
-              before(row) {
-                return row.age < 40;
-              },
-              click: this.$_handleEdit,
-            },
-            {
-              id: "delete",
-              text: "删除",
-              icon: "el-icon-delete",
-              disabled(row) {
-                return row.sex === 0;
-              },
-              // 为了拿到this,这里需要用箭头函数
-              click: () => {
-                this.$alert("女生被禁止删除了");
-              },
-            },
-          ],
-        },
+        // {
+        //   label: "年龄",
+        //   prop: "age",
+        // },
+        // {
+        //   label: "公众号",
+        //   prop: "officialAccount",
+        // },
+        // // 行编辑按钮，在表格末尾出现，自动锁定右侧
+        // {
+        //   width: 180,
+        //   label: "操作",
+        //   actions: [
+        //     {
+        //       id: "follow",
+        //       text: "关注作者",
+        //       click: this.$_handleFollowAuthor,
+        //     },
+        //     {
+        //       id: "edit",
+        //       text: "编辑",
+        //       // 可以通过before控制按钮是否显示，比如下面年龄四十岁的才会显示编辑按钮
+        //       before(row) {
+        //         return row.age < 40;
+        //       },
+        //       click: this.$_handleEdit,
+        //     },
+        //     {
+        //       id: "delete",
+        //       text: "删除",
+        //       icon: "el-icon-delete",
+        //       disabled(row) {
+        //         return row.sex === 0;
+        //       },
+        //       // 为了拿到this,这里需要用箭头函数
+        //       click: () => {
+        //         this.$alert("女生被禁止删除了");
+        //       },
+        //     },
+        //   ],
+        // },
       ]),
       data: [],
       // 当前页码
