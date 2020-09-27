@@ -68,6 +68,11 @@ export default {
       type: Boolean,
       required: true,
     },
+    // 表格是否排序
+    sortable: {
+      type: Boolean,
+      default: false
+    },
   },
   data() {
     return {
@@ -87,12 +92,12 @@ export default {
           const { hidden } = column;
           if (hidden !== undefined) {
             if (typeof hidden === "function") {
-              return hidden({
+              return !hidden({
                 columns: this.columns,
                 column,
               });
             }
-            return hidden;
+            return !hidden;
           }
           return true;
         })

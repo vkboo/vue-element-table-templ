@@ -8,6 +8,8 @@
     :total="total"
     :buttons="buttons"
     :sequence="true"
+    :sortable="true"
+    @sort-change="handleSortChange"
     @page-change="$_handlePageChange"
   >
     <template #toolbar>
@@ -192,6 +194,9 @@ export default {
       console.log(row, column);
       this.$alert(`点击了姓名为【${row.name}】的行上的按钮`);
     },
+    handleSortChange(params) {
+      console.warn(params)
+    }
   },
 };
 </script>

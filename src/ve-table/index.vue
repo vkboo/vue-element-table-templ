@@ -18,6 +18,7 @@
       :columns="columns"
       :selectable="selectable"
       :sequence="sequence"
+      :sortable="sortable"
     ></ve-table-content>
     <ve-page />
   </div>

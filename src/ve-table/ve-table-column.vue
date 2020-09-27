@@ -3,7 +3,6 @@
       v-bind="column.attrs"
       v-on="column.listeners"
     >
-
         <!-- 嵌套的情况 -->
         <el-table-column
             v-bind="column.attrs"
